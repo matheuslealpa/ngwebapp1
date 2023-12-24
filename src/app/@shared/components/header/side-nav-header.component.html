@@ -1,0 +1,36 @@
+<mat-sidenav-container class="app-side-nav-header-container">
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list>
+      <ng-container *ngFor="let menuItem of appNavigation">
+        <a *ngIf="!menuItem.items" mat-list-item [routerLink]="menuItem.path">
+          {{ menuItem.caption }}
+        </a>
+        <div *ngIf="menuItem.items">
+          <a mat-list-item [routerLink]="menuItem.path" style="margin-left: 16px;">
+            {{ menuItem.caption }}
+          </a>
+          <mat-list>
+            <a *ngFor="let subItem of menuItem.items" mat-list-item [routerLink]="subItem.path"
+              style="margin-left: 32px;">
+              {{ subItem.caption }}
+            </a>
+          </mat-list>
+        </div>
+      </ng-container>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>NG APP 1</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
